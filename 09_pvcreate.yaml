@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prom-store-pvc 
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  mountOptions:
+    - tls
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: eks-efs
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-07201fcb8614584fd
+--- 
