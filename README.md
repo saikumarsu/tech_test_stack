@@ -22,19 +22,18 @@ Following tools configured in cloud9 IDE/laptop
 
 **EKS Cluster creation**
 
-- 02_eks_cluster.tf is uing public modules to create the eks cluster in eu-west-1 region. for testing purposes, configured a 2 worker (blue/green) node cluster.
+- 02_eks_cluster.tf & 03_eks_nodes.tf is uing public modules to create the eks cluster in eu-west-1 region. for testing purposes, configured a 2 worker (blue/green) node cluster.
 
 
 
 
-![image](https://user-images.githubusercontent.com/34026320/167357521-05a403ba-df49-4698-85a2-6f1aed423e3e.png)
 
 
 **IAM role and Security groups**
 
 - 03_eks_role.tf is updated with IAM role and security group config
 
-![image](https://user-images.githubusercontent.com/34026320/167368140-d79207aa-13ef-4d51-9313-30720879c2a8.png)
+
 
 
 Sample web app deployment
@@ -43,7 +42,7 @@ One of the java web app is configured to test the deployment, this is recommende
 High availability purposes there are 2 replicas deployed and this can be autoscaled.
 
 
-04_web_app.tf
+11_web_app.tf
 
 ![image](https://user-images.githubusercontent.com/34026320/167369367-149f23e6-531a-4063-a0a3-c1180c24fe1d.png)
 
@@ -63,17 +62,14 @@ And the web interface is accessable via internet facing loadbalancer (testing pu
 
 The monitoring tools are deployed theiugh helm charts, and are copied in the respective directories. 
 
-05_helm_prometheus_grafana.tf
-
-![image](https://user-images.githubusercontent.com/34026320/167383684-9e51c36f-3612-4c0f-95a6-6773b5f8fb40.png)
 
 
 These services are deployed under a seperate namespace 'monitoring'
-![image](https://user-images.githubusercontent.com/34026320/167384008-c5d9c4f5-e580-40e0-b17d-7698f3bd3c67.png)
+
 
 The web interface is not exposed to public internet, and is accessable form the workspace.
 
-![image](https://user-images.githubusercontent.com/34026320/167384313-e8af56a3-d895-4454-aa44-e068123685ca.png)
+
 
 
 Exporter configuration and specific alert status code extraction is pending, facing some issues provisioning the persistant storage to pods. Will work and get this sorted.
