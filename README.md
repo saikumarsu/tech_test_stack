@@ -108,5 +108,5 @@ Integrate prometheus alerts to grafa using the prometheus internal IP and applic
 
 ![image](https://user-images.githubusercontent.com/34026320/167902532-6870c2f0-fef6-449c-965a-4e739884f4c9.png)
 
-![image (1)](https://user-images.githubusercontent.com/34026320/167835672-5dccdd4e-55f1-434a-b6ab-6eb7d77ce014.png)
+
 
