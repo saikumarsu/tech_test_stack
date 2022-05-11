@@ -30,7 +30,7 @@ Following tools configured in cloud9 IDE/laptop
 [05-iam-role.tf] - This is optional depending on where the kubectl is running and how needs to manage the eks cluster resource. I'm uing cloud9 instance and attach this role to manage the eks cluster resources running in the same aws account.
 
 
-**1.5 Deploy Sample Web-app**
+**1.5 Deploy Sample WebApp**
 
 [06_web_app.tf] - Sample web app deployment
 
@@ -94,4 +94,19 @@ Alert monitoring configured for the pods -
 
   
 **2.3 Grafana service deployment**
+
+[grafana.yaml] Created persistent volume claim, deployment spec and deploys service deployment yaml
+
+Web url can be accessed on external loadbalancer dns, recommended to add in R53 custom dns.
+
+![image](https://user-images.githubusercontent.com/34026320/167907283-cb6fde42-8532-442c-8dc5-3ace1a339cab.png)
+
+
+**2.4 Integrate with prometheus and create dashboard**
+
+Integrate prometheus alerts to grafa using the prometheus internal IP and application port, enable GET API.
+
+![image](https://user-images.githubusercontent.com/34026320/167902532-6870c2f0-fef6-449c-965a-4e739884f4c9.png)
+
+![image (1)](https://user-images.githubusercontent.com/34026320/167835672-5dccdd4e-55f1-434a-b6ab-6eb7d77ce014.png)
 
