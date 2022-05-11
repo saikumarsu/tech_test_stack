@@ -1,10 +1,10 @@
 # EKS cluster creation and webApp deployment
 
-**Usage**
+**1.1. Usage**
 
 This stack creates basic network infrastructure (VPCs/Subnets/NAT Gateways etc.), EKS cluster, associated IAM roles/policies to enable kubectl access from workstation/cloud9 IDE. Also will be testing a basic web app deployment.
 
-**Pre-requisites**
+**1.2. Pre-requisites**
 
 Following tools configured in cloud9 IDE/laptop
 
@@ -14,7 +14,7 @@ Following tools configured in cloud9 IDE/laptop
 4. IAM authenticator
 5. Git client 
 
-**Base network creation**
+**1.3. Base network creation**
 
 [backend.tf]Local backend configured for terraform statefiles 
 [provider.tf]provider configuration for the associated tools 
@@ -22,7 +22,7 @@ Following tools configured in cloud9 IDE/laptop
 [01_eks_vpc.tf] VPC/Subnets/IG/Routing Table/Routing table configs 
 - initialise terraform, plan and apply to create the base network resources including public subnet and private subnets.
 
-**EKS Cluster creation**
+**1.4. EKS Cluster creation**
 
 [02_eks_cluster.tf] - Creates IAM role/policies, cluster security groups, and EKS lsuter
 [03_eks_nodes.tf] - Creates IAM roles/polices for node groups, private keys for nodes groups and eks node groups
@@ -30,7 +30,7 @@ Following tools configured in cloud9 IDE/laptop
 [05-iam-role.tf] - This is optional depending on where the kubectl is running and how needs to manage the eks cluster resource. I'm uing cloud9 instance and attach this role to manage the eks cluster resources running in the same aws account.
 
 
-**Deploy Sample Web-app**
+**1.5 Deploy Sample Web-app**
 
 [06_web_app.tf] - Sample web app deployment
 
@@ -54,7 +54,7 @@ And the web interface is accessable via internet facing loadbalancer (testing pu
 
 # Service monitoring (Prometheus, Garafana, Alertmanager)
 
-**Storage configuration based on AWS EFS**
+**2.1 Storage configuration based on AWS EFS**
 
 [07_eks_efs.tf] - Created EFS storage, iam roles, security groups to access the efs storage and creates access point.
 
@@ -66,7 +66,7 @@ And the web interface is accessable via internet facing loadbalancer (testing pu
 
 [11_pvcreate.yaml] - Creates persistance volume for data high availability, in the event of pod restarts/moving to different eks nodes, the data will be persistant. 
 
-**Promethus service deployment**
+**2.2 Promethus service deployment**
 
 [12_prometheus.tf] - This created persistance volume claim for prometheus pods, configMap for teh service, deployment spec and prometheus service deployment
 
@@ -79,5 +79,5 @@ Alert monitoring configured for the pods -
 
 ![image](https://user-images.githubusercontent.com/34026320/167835436-1b26f73c-6abb-4784-a190-bf50d24bffa0.png)
 
-**Grafana service deployment**
+**2.3 Grafana service deployment**
 
