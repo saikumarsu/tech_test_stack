@@ -16,33 +16,27 @@ Following tools configured in cloud9 IDE/laptop
 
 **Base network creation**
 
-- Local backend configured for terraform statefiles
-- provider configuration for the associated tools
-- initialise tf, plan and apply 01_eks_vpc.tf to create the base network. This created the VPC, public subnet and private subnets.
+[backend.tf]Local backend configured for terraform statefiles 
+[provider.tf]provider configuration for the associated tools 
+
+[01_eks_vpc.tf] VPC/Subnets/IG/Routing Table/Routing table configs 
+- initialise terraform, plan and apply to create the base network resources including public subnet and private subnets.
 
 **EKS Cluster creation**
 
-- 02_eks_cluster.tf & 03_eks_nodes.tf is uing public modules to create the eks cluster in eu-west-1 region. for testing purposes, configured a 2 worker (blue/green) node cluster.
+[02_eks_cluster.tf] - Creates IAM role/policies, cluster security groups, and EKS lsuter
+[03_eks_nodes.tf] - Creates IAM roles/polices for node groups, private keys for nodes groups and eks node groups
+[04-output.tf] - Creates configmap and auth configs for the cluster
+[05-iam-role.tf] - This is optional depending on where the kubectl is running and how needs to manage the eks cluster resource. I'm uing cloud9 instance and attach this role to manage the eks cluster resources running in the same aws account.
 
 
+**Deploy Sample Web-app**
 
-
-
-
-**IAM role and Security groups**
-
-- 03_eks_role.tf is updated with IAM role and security group config
-
-
-
-
-Sample web app deployment
+[06_web_app.tf] - Sample web app deployment
 
 One of the java web app is configured to test the deployment, this is recommended to deploy the services through CICD/Helm charts. In this the job is configured as terraform resource block is called to deply the microservice. Created the docker image and pushed to docker hub as the container registery.
 High availability purposes there are 2 replicas deployed and this can be autoscaled.
 
-
-11_web_app.tf
 
 ![image](https://user-images.githubusercontent.com/34026320/167369367-149f23e6-531a-4063-a0a3-c1180c24fe1d.png)
 
@@ -60,19 +54,30 @@ And the web interface is accessable via internet facing loadbalancer (testing pu
 
 # Service monitoring (Prometheus, Garafana, Alertmanager)
 
-The monitoring tools are deployed theiugh helm charts, and are copied in the respective directories. 
+**Storage configuration based on AWS EFS**
+
+[07_eks_efs.tf] - Created EFS storage, iam roles, security groups to access the efs storage and creates access point.
+
+[08_efs_provider.tf] - efs endpoint out defined
+
+[09_efs_rbac.tf] - cluster role binding to the nfs provisioner
+
+[10_efs_provisioner.tf] - creates service and runs in the EKS to check of the available persistance storage and binds to the containers
+
+[11_pvcreate.yaml] - Creates persistance volume for data high availability, in the event of pod restarts/moving to different eks nodes, the data will be persistant. 
+
+**Promethus service deployment**
+
+[12_prometheus.tf] - This created persistance volume claim for prometheus pods, configMap for teh service, deployment spec and prometheus service deployment
+
+On successfull deployment, prometheus service will be accessable through external alb url
+
+![image (1)](https://user-images.githubusercontent.com/34026320/167835672-5dccdd4e-55f1-434a-b6ab-6eb7d77ce014.png)
 
 
+Alert monitoring configured for the pods -
 
-These services are deployed under a seperate namespace 'monitoring'
+![image](https://user-images.githubusercontent.com/34026320/167835436-1b26f73c-6abb-4784-a190-bf50d24bffa0.png)
 
-
-The web interface is not exposed to public internet, and is accessable form the workspace.
-
-
-
-
-Exporter configuration and specific alert status code extraction is pending, facing some issues provisioning the persistant storage to pods. Will work and get this sorted.
-
-
+**Grafana service deployment**
 
