@@ -90,6 +90,8 @@ Alert monitoring configured for the pods -
   git clone https://github.com/devopscube/kube-state-metrics-configs.git
   kubectl apply -f kube-state-metrics-configs/
   
+  ![image](https://user-images.githubusercontent.com/34026320/167894427-aea19693-cf06-45c3-b4d0-696c73d9c05e.png)
+
   
 **2.3 Grafana service deployment**
 
