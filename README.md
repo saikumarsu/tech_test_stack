@@ -58,6 +58,13 @@ And the web interface is accessable via internet facing loadbalancer (testing pu
 
 [07_eks_efs.tf] - Created EFS storage, iam roles, security groups to access the efs storage and creates access point.
 
+- Deploy EFS CSI driver 
+
+  helm repo add aws-efs-csi-driver https://kubernetes-sigs.github.io/aws-efs-csi-driver/
+  helm repo update
+  helm upgrade --install aws-efs-csi-driver --namespace kube-system aws-efs-csi-driver/aws-efs-csi-driver
+
+
 [08_efs_provider.tf] - efs endpoint out defined
 
 [09_efs_rbac.tf] - cluster role binding to the nfs provisioner
@@ -79,5 +86,10 @@ Alert monitoring configured for the pods -
 
 ![image](https://user-images.githubusercontent.com/34026320/167835436-1b26f73c-6abb-4784-a190-bf50d24bffa0.png)
 
+- Kube state matics configuration
+  git clone https://github.com/devopscube/kube-state-metrics-configs.git
+  kubectl apply -f kube-state-metrics-configs/
+  
+  
 **2.3 Grafana service deployment**
 
