@@ -86,13 +86,21 @@ Alert monitoring configured for the pods -
 
 ![image](https://user-images.githubusercontent.com/34026320/167835436-1b26f73c-6abb-4784-a190-bf50d24bffa0.png)
 
-- Kube state matics configuration
+- Kube state matrics configuration
   git clone https://github.com/devopscube/kube-state-metrics-configs.git
   kubectl apply -f kube-state-metrics-configs/
   
   ![image](https://user-images.githubusercontent.com/34026320/167894427-aea19693-cf06-45c3-b4d0-696c73d9c05e.png)
 
-  
+- Node exporter matrics config
+
+![image](https://user-images.githubusercontent.com/34026320/168930034-9b0652dc-dcd9-417d-90ea-3cd5e5be9c1c.png)
+
+![image](https://user-images.githubusercontent.com/34026320/168930104-6de565bb-d43c-4f30-a0c3-ceaa688cd8ab.png)
+
+![image](https://user-images.githubusercontent.com/34026320/168930188-35aebc9c-e117-4241-9e33-199defad219a.png)
+
+
 **2.3 Grafana service deployment**
 
 [grafana.yaml] Created persistent volume claim, deployment spec and deploys service deployment yaml
